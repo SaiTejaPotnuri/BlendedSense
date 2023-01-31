@@ -13,7 +13,7 @@ import { DashboardserviceService } from 'src/app/Services/dashboardservice.servi
 export class BussinessComponent {
   listOfServices = [{ name: 'My Businesses' }, { name: 'All Businesses' }]
   statusOfFetchingDataFromApi: boolean = false;
-  gitChecking;
+  
   dummy = { name: ' s  ' }
   usersData: any
   allBusinessData: any
