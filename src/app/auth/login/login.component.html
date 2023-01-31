@@ -1,0 +1,108 @@
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+</head>
+<div  [class]="displayForgotPasswordDialogBoxStatus ? 'container makeBackgroundBlur' :'container' " >
+    <div class="headerContainer">
+            <app-dropdowncomponent [dropDownIcondisplay]="'pi pi-sort-down'" [optinoalLabelInfo]="'name'" [FormGroup]="languageChangeForm" [name]="'selectedLang'" (selectedItemInfo)="selectedLanguageFromList($event)" [selectedItem]="languageSelecteFirst" [itemsList]="listOfLanguages"></app-dropdowncomponent>
+    </div>
+
+    <div class="subContainer">
+        <div class="producerContainer">
+            <img [src]="images.producer" class="producerImage" alt="no image" />
+        </div>
+        <div class="ownerContainer">
+            <img [src]="images.bussinessOwner" class="bussinessOwner" alt="no image" />
+        </div>
+
+
+        <div class="formContainer">
+            <img [src]="images.logo" class="logo" alt="No Image">
+            <h1 class="heading">LOGIN</h1>
+
+            <a href="#" class="anchorTag"><span class="googleIconAndText"><img class="googleLogo"
+                        [src]="images.googleLogo" alt="No Image"> <span class="googletextStyle"> Continue with Google
+                    </span></span></a>
+            <table>
+                <tr>
+                    <td style="width:46%">
+                        <hr />
+                    </td>
+                    <td class="horizontaillineAndOrText">or</td>
+                    <td style="width:47%">
+                        <hr />
+                    </td>
+                </tr>
+            </table>
+            <div class="inputTagStyleDiv">
+                <app-inputtag [typeOfInput]="'email'" [styleClass]="'p-input-icon-right'" [label]="'User Name'"
+                    [fieldIcon]="loginForm.get('email')?.invalid && this.loginForm.get('email')?.touched  ?'pi pi-exclamation-circle' : ''"
+                    [FormGroup]="loginForm" [placeholder]="'username'" [name]="'email'"></app-inputtag>
+                <app-errormessage [styles]="'p-error block FontStyle'"
+                    [ststusOfErrorMessage]="checkIfErrorOrNot('email',loginForm)"
+                    [errorText]="'Please provide your email address'"></app-errormessage>
+            </div>
+            <div class="inputTagStyleDiv">
+                <app-inputtag [typeOfInput]="'password'" [label]="'password'" [styleClass]="'p-input-icon-right'"
+                    [passwordId]="'mypassword'" [fieldIcon]="'pi pi-eye-slash'" [FormGroup]="loginForm"
+                    [placeholder]="'password'" [name]="'password'"></app-inputtag>
+                <app-errormessage [styles]="'p-error block FontStyle'"
+                    [ststusOfErrorMessage]="checkIfErrorOrNot('password',loginForm)"
+                    [errorText]="'Please provide your password'"></app-errormessage>
+            </div>
+
+            <div class="buttonsDiv">
+                <app-buttontag [type]="'submit'"  [buttonStyleClass]="'p-button-rounded p-button-purple'"
+                    [label]="'Login With Email'" (buttonClickStatus)="signUpForm()"
+                    [disabled]="this.loginForm.invalid && checkButtonClickedStatus === true ? true : false  "></app-buttontag>
+                <!-- <app-buttontag [type]="'reset'" [buttonLoading]="isLoading" [label]="'Reset'" (buttonClickStatus)="loginForm.reset()" [disabled]="false"></app-buttontag> -->
+            </div>
+
+
+            <a (click)="activateForgotPasswordDialogBox()" class="forgotPasswordText">Forgot Password?</a>
+            <div class="needAnAccountDiv">
+                <p class="needAnAccount"> Need an account? </p>
+                <a class="signUpText"  (click)="signUp()"> Sign Up</a>
+            </div>
+
+
+        </div>
+
+        <div class="createrContainer">
+            <img [src]="images.creater" class="createrStyle" alt="no image" />
+        </div>
+        <div class="EquipmentContainer">
+            <img [src]="images.equipment" class="EquipmentStyle" alt="no image" />
+        </div>
+
+    </div>
+    <div class="lineStyle">
+        <hr class="hrStyle">
+    </div>
+</div>
+
+
+<p-dialog header="Recover Password" [(visible)]="displayForgotPasswordDialogBoxStatus"
+    [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '28vw'}" [modal]="true" [draggable]="false">
+    <div class="ForgotPasswordDialogBoxTextAndInputBoxStyle">
+        <p class="dialogBoxTitle">Enter the email address associated with your account.</p>
+        <div class="inputTagStyleDivForDialogBox">
+            <app-inputtag [typeOfInput]="'email'" [styleClass]="'p-input-icon-right'"
+                [fieldIcon]="forgotPasswordForm.get('userEmail')?.invalid && this.forgotPasswordForm.get('userEmail')?.touched  ?'pi pi-exclamation-circle' : ''"
+                [FormGroup]="forgotPasswordForm" [name]="'userEmail'"></app-inputtag>
+            <app-errormessage [styles]="'p-error block FontStyle'" [ststusOfErrorMessage]="checkResetPasswordEmailEnteredOrNot('userEmail',forgotPasswordForm)"
+                [errorText]="'Please provide your email address.'"></app-errormessage>
+        </div>
+        <div class="dialogBoxButtonStyle">
+
+            <app-buttontag [type]="'button'"
+                [buttonStyleClass]="'p-button-secondary p-button-rounded p-button-text FontStyle'" [label]="' Cancel '"
+                (buttonClickStatus)="cancelDialogBox()" [disabled]="false"></app-buttontag>
+
+            <app-buttontag [type]="'submit'" [buttonStyleClass]="'p-button-rounded p-button-purple FontStyle'"
+                [label]="' Send Reset Link '" (buttonClickStatus)="submitPasswordResetEmailId()"
+                [disabled]="this.forgotPasswordForm.invalid && checkButtonClickedStatus === true ? true : false  "></app-buttontag>
+        </div>
+    </div>
+</p-dialog>
+<!-- 
+<p-toast position="top-right"></p-toast> -->

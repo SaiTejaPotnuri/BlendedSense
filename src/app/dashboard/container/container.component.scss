@@ -1,0 +1,41 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 100%;
+    height:100vh;
+    display: flex;
+}
+.sidebarContainer{
+    
+    width:18%;
+    height: 100vh;
+    color: rgb(205, 203, 199);
+    background-color:rgba(0, 0, 0, 0.87);
+}
+.subContainer{
+
+    width: 82%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebarAfterContainer{
+    transition: 0.3s;
+    width:4%;
+    height:100vh;
+    color: rgb(205, 203, 199);
+    background-color:rgba(0, 0, 0, 0.87);
+}
+
+.subContainerAfter{
+
+    width: 96%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}

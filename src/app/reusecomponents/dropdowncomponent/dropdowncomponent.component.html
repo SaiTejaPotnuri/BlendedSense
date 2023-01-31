@@ -1,0 +1,9 @@
+<div [formGroup]="FormGroup" [class]="dropDownDiv">
+
+   
+<p-dropdown [options]="itemsList" [(ngModel)]="selectedItem"     [optionLabel]="optinoalLabelInfo"
+    [showClear]="false" [style]="{width: '250px'}" [placeholder]="placeHolder" [id]="Id"   id="Check2"  [dropdownIcon]="dropDownIcondisplay" [formControlName]="name"></p-dropdown>
+    <label for="Check2" class="otLabelMulti">{{displayLabel}}</label> 
+    
+
+</div>

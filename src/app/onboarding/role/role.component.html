@@ -1,0 +1,46 @@
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+</head>
+<div>
+    <div>
+        <app-header></app-header>
+    </div>
+    <div class="container">
+        <div class="subcontainer">
+            <p class="registerText">Join as a customer or creative </p>
+            <div class="cardsContainer">
+                <div id="client" pRipple (click)="selectedCard('client')"  class="grey singleCardContainer">
+                    <p-card header="Customer" id="clientCard"
+                        [style]="{'width': '16rem','height':'20rem'}">
+                        <ng-template pTemplate="header">
+                            <img alt="Card" class="customerLogo" [src]="imagesData.custmerLogo">
+                        </ng-template>
+                        <p class="cardParagraph">I'm a local business owner. I need content! </p>
+                    </p-card>
+                </div>
+                <div id="creative" pRipple class="grey singleCardContainer" (click)="selectedCard('creative')">
+                    <p-card header="Freelancer"   
+                        [style]="{'width': '16rem','height':'20rem'}">
+                        <ng-template pTemplate="header">
+                            <img alt="Card" class="customerLogo" [src]="imagesData.freenlancerLogo">
+                        </ng-template>
+                        <p class="cardParagraph">I'm a creative professional. I want to create content.</p>
+                    </p-card>
+                </div>
+
+            </div>
+            <div class="createAccountButtonDiv">
+                    <!-- //(buttonClickStatus)="signUpForm()" -->
+                <app-buttontag [type]="'button'" [buttonStyleClass]="'p-button-rounded'"
+                    [label]="labelToChangeText" (buttonClickStatus)="signInForm()"
+                    [disabled]="labelToChangeText === 'Create Account'"></app-buttontag>
+        </div>
+        <div class="alreadyHavingAccount">
+                <p>Already have an account?</p>
+                <a routerLink="/login">Login</a>
+        </div>
+
+     </div>
+    </div>
+</div>

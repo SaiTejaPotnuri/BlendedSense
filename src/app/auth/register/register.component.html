@@ -1,0 +1,26 @@
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+</head>
+<div>
+    <div>
+        <app-header></app-header>
+    </div>
+
+    <div>
+            <!-- [(visible)]=true -->
+        <p-dialog [header]="dialogboxHeaderData" [(visible)]="displayDialogBox"
+            [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '28vw'}"  [closeOnEscape]="false" [closable]="false" [modal]="true" [draggable]="false">
+                <div class="container">
+                   <p><i class="pi pi-exclamation-circle infoIcon"></i></p>
+                   <p class="textInfo">Sorry, This page is in under construction.</p>
+                   <p class="textInfo">kindly try after some time.</p>
+                    <div class="buttonStyle">
+                        <app-buttontag [type]="'button'" [buttonStyleClass]="'p-button-rounded p-button-purple'" (buttonClickStatus)="redirectToHomePage()" [label]="'ok'"></app-buttontag>
+                    </div>
+                </div>
+        </p-dialog>
+
+    </div>
+
+  </div>  

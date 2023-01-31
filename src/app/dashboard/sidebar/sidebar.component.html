@@ -1,0 +1,99 @@
+<div>
+    <div *ngIf="!minimizeSidebarStatus">
+        <div class="logoContainer">
+            <img [src]="imagesData.headerLogo" class="logo" alt="NoLogo">
+        </div>
+
+        <div class="routesContainer">
+            <ul>
+                <li routerLink="/user/dashboard" routerLinkActive="active">
+                    <div class="iconAndTextStyleDiv">
+                        <img class="iconStyle" [src]="imagesData.homeDashboard" alt="HomeDashboardLogoMissing">
+                        <p>Dashboard</p>
+                    </div>
+                </li>
+                <li routerLink="/user/projects" routerLinkActive="active">
+                    <div class="iconAndTextStyleDiv">
+                        <img class="iconStyle" [src]="imagesData.BussinessLogo" alt="BussinessLogoMissing">
+                        <p>Businesses</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="iconAndTextStyleDiv">
+                        <img class="iconStyleCalender" [src]="imagesData.calendarLogo" alt="SweepLogoMissing">
+                        <p>Sweeps</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="iconAndTextStyleDiv">
+                        <img class="iconStyle" [src]="imagesData.usersIcon" alt="UserLogoMissing">
+                        <p>Users</p>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="footerContainer">
+            <div class="footerSubContainer" (click)="help.toggle($event)">
+                <img class="iconStyleCalender" [src]="imagesData.commentHelpIcon" alt="CommentLogoMissing">
+                <span class="helpText">Help?</span>
+            </div>
+            <div class="sidebarMinimizeDivStyle" (click)="minimizeSidebar()">
+                <i class="pi pi-angle-left sidebarMinimizIcon"></i><i class="pi pi-angle-right sidebarMinimizIcon"></i>
+            </div>
+
+            <p-overlayPanel #help [showCloseIcon]="false" [showTransitionOptions]="'0.2s'"
+                [style]="{width: '250px',padding:'10px'}">
+                <ng-template pTemplate>
+                    <p class="dialogBoxText">Have a question or need support within the app? Contact Technical Support
+                        at
+                    </p>
+                    <a href="mailto:support@blendedsense.com" class="anchorlink"> support@blendedsense.com </a>
+                </ng-template>
+            </p-overlayPanel>
+        </div>
+    </div>
+    <div *ngIf="minimizeSidebarStatus" class="mainContainerAfterMinimize">
+
+        <div class="logoContainerAfterMinimize">
+            <img [src]="imagesData.logoShort" class="logo" alt="NoLogo">
+        </div>
+
+        <div class="routesContainerLogoes">
+            <ul>
+                <li routerLink="/user/dashboard" routerLinkActive="active">
+                    <img class="iconStyle" [src]="imagesData.homeDashboard" alt="HomeDashboardLogoMissing">
+                </li>
+                <li routerLink="/user/projects" routerLinkActive="active">
+                    <img class="iconStyle" [src]="imagesData.BussinessLogo" alt="BussinessLogoMissing">
+                </li>
+                <li>
+                    <img class="iconStyleCalender" [src]="imagesData.calendarLogo" alt="SweepLogoMissing">
+                </li>
+                <li>
+                    <img class="iconStyle" [src]="imagesData.usersIcon" alt="UserLogoMissing">
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="footerAfterMinimizeContainer">
+
+            <img class="iconStyleCalender" (click)="helpDialog.toggle($event)" [src]="imagesData.commentHelpIcon"
+                alt="CommentLogoMissing">
+            <div class="sidebarMinimizeDivStyle" (click)="minimizeSidebar()">
+                <i class="pi pi-angle-left sidebarMinimizIcon"></i><i class="pi pi-angle-right sidebarMinimizIcon"></i>
+            </div>
+        </div>
+
+
+    </div>
+    <p-overlayPanel #helpDialog [showCloseIcon]="false" [showTransitionOptions]="'0.2s'" [style]="{width: '250px'}">
+        <ng-template pTemplate>
+            <p class="dialogBoxText">Have a question or need support within the app? Contact Technical Support at
+            </p>
+            <a href="mailto:support@blendedsense.com" class="anchorlink"> support@blendedsense.com </a>
+        </ng-template>
+    </p-overlayPanel>
+</div>

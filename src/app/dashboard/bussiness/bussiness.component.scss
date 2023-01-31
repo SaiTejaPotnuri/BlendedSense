@@ -1,0 +1,653 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+
+.container {
+  width: 100%;
+  height: 85vh;
+  //border: 1px solid black;
+}
+
+.fonth1 {
+  font-family: Mulish;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 46px;
+  line-height: 58px;
+  color: #343838;
+}
+
+.bussinessHeader {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.dropDownUl {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  font-family: Poppins;
+  gap: 10px;
+  margin: 10px 0px;
+
+  // margin-right: 35px;
+}
+
+.dropDownUl li {
+  list-style: none;
+  width: 100%;
+  height: 30px;
+  padding: 5px 15px;
+  font-size: 16px !important;
+  font-family: Poppins !important;
+  font-weight: 400 !important;
+  line-height: normal !important;
+}
+
+.dropDownUl li:nth-child(1):hover,
+li:nth-child(2):hover {
+  font-family: Poppins;
+  background-color: rgb(246, 246, 250);
+  cursor: pointer;
+}
+
+::ng-deep {
+  .dropdownAndSearchContainer {
+    width: 95%;
+    height: 15%;
+    margin-left: 40px;
+    margin-right: 10px;
+    margin-top: 5px;
+    // margin-bottom: 5px;
+    // padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dropdownContainer {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .dropdownContainer {
+    .p-dropdown {
+      background: #ffffff;
+      border: none;
+      transition: none;
+      width: fit-content !important;
+    }
+
+    .p-dropdown-label {
+      flex: none !important;
+      width: fit-content !important;
+    }
+
+    .p-dropdown:not(.p-disabled).p-focus {
+      box-shadow: none;
+    }
+
+    .p-overlay {
+      position: absolute;
+      margin-top: -35px;
+    }
+  }
+
+  .searchContainer {
+    .inputtagStyle {
+      width: 100%;
+      height: 40px !important;
+      border-radius: 4px;
+    }
+  }
+
+  .inputTagDiv {
+    .inputtagStyle {
+      width: 100%;
+      min-height: 40px !important;
+      height: 40px !important;
+      border-radius: 4px;
+    }
+  }
+
+
+  .fNAndLNTagStyle {
+    .inputtagStyle {
+      width: 100%;
+      min-height: 40px !important;
+      height: 40px !important;
+      border-radius: 4px;
+    }
+  }
+
+  .testing {
+    .p-dialog .p-dialog-footer {
+      border-top: 1px solid #e0e0e0;
+      background: #ffffff;
+      color: #495057;
+      text-align: right;
+      padding: 14px 27px 18px;
+      border-bottom-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+    }
+    .p-dialog {
+      display: flex;
+      flex-direction: column;
+      pointer-events: auto;
+      max-height: 90%;
+      transform: scale(1);
+      position: relative;
+    //  margin-top: 60px !important;
+      margin-bottom: 30px !important;
+  }
+
+    .p-dialog .p-dialog-header {
+      border-bottom: 1px solid #e0e0e0;
+      background: #ffffff;
+      color: #343a40;
+      padding: 16px 18px 18px;
+      border-top-right-radius: 6px;
+      border-top-left-radius: 6px;
+    }
+  }
+
+  .cancelButton {
+    .p-button .p-button-label {
+      text-transform: uppercase !important;
+      font-weight: 500 !important;
+      line-height: 19px !important;
+      font-size: 16px !important;
+      letter-spacing: -0.38px !important;
+      font-family: Poppins !important;
+    }
+  }
+
+  .saveButtonDiv {
+    .p-button .p-button-label {
+      text-transform: uppercase;
+      font-weight: 500;
+      line-height: 19px;
+      font-size: 16px;
+      width: 80px;
+    }
+  }
+
+  .businessVerticalDiv {
+    .p-dropdown {
+      display: inline-flex;
+      cursor: pointer;
+      position: relative;
+      user-select: none;
+      width: 100% !important;
+    }
+
+    .p-overlay {
+      position: absolute;
+      width: 101%;
+      margin-top: -60px !important;
+      margin-left: -1px !important;
+      box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
+      z-index: 50;
+    }
+
+    .p-dropdown:not(.p-disabled).p-focus {
+      box-shadow: none !important;
+      border-color: none !important;
+    }
+
+    .p-inputtext {
+      font-family: Poppins !important;
+      font-size: 1rem;
+      padding: 0.75rem 0.75rem;
+      transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+      appearance: none;
+      border-radius: 6px;
+      min-height: 40px !important;
+    }
+  }
+
+  .multiselectDropDownDiv {
+
+    .p-multiselect:not(.p-disabled):hover {
+      border-color: none !important;
+    }
+    .p-multiselect:not(.p-disabled).p-focus{
+        box-shadow: none !important;
+    }
+    .p-multiselect-chip .p-multiselect-label {
+      display: flex;
+      flex-wrap: wrap !important;
+  }
+  .p-component{
+    font-family: Poppins !important;
+    font-size: 1rem;
+    font-weight: normal;
+  }
+
+    .p-multiselect {
+      // display: inline-flex;
+      cursor: pointer;
+      position: relative;
+      min-width: 100% !important;
+      max-width: 100% !important;
+      border: hidden !important;
+      border-bottom: 1px solid #F1F1F1 !important;
+      height: auto;   
+     }
+
+     .p-multiselect-panel .p-multiselect-items .p-multiselect-item {
+      margin: 0;
+      padding: 0.75rem 1.25rem;
+      border: 0 none;
+      color: #495057;
+      background: transparent;
+      transition: box-shadow 0.2s;
+      border-radius: 0;
+      max-width: 200px !important;
+      text-overflow: ellipsis !important;
+  }
+  .p-multiselect-panel .p-multiselect-items .p-multiselect-item:not(.p-highlight):not(.p-disabled):hover {
+    color: #495057;
+    background: #e9ecef;
+    min-width: 100% !important;
+}
+     
+  }
+
+  
+  .operationsTeam{
+//     .panelStyleChange{
+//       .p-overlay{
+//         position: absolute;
+//         top: auto !important;
+//         bottom: 63px !important;
+//         left: 0;
+//     }
+//     }
+//     .p-multiselect-panel .p-multiselect-items .p-multiselect-item:not(.p-highlight):not(.p-disabled):hover {
+//       min-width: 100% !important;
+//       color: #495057;
+//       background: #e9ecef;
+      
+//   }
+//   .p-multiselect-panel .p-multiselect-items .p-multiselect-item:focus {
+//     outline: 0 none;
+//     outline-offset: 0;
+//     box-shadow: none !important;
+// }
+
+.multiselectDropDownDiv{
+
+  .styleDropDown{
+
+    .p-dropdown:not(.p-disabled):hover {
+      border-color: none !important;
+    }
+    .p-dropdown:not(.p-disabled).p-focus{
+      box-shadow: none !important;
+      border-color: none !important;
+    }
+
+
+     .p-component {
+      font-family: Poppins !important;
+      font-size: 1rem;
+      min-width: 100% !important;
+      min-height: 40px !important;
+      font-weight: normal;
+      border: none !important;
+      border-bottom: 1px solid #F1F1F1 !important;
+      top: auto !important;
+      bottom: 146% !important; 
+  }
+  .p-inputtext {
+    margin: 0;
+    padding: 0.375rem 0.75rem;
+    background: #EFF6FF !important;
+    color: #1D4ED8;
+    font-family: Poppins;
+    font-size: 1rem;
+    border-radius: 6px;
+}
+
+.p-dropdown .p-dropdown-label {
+    max-width: fit-content !important;
+    border: 0 none;
+ 
+}
+
+.p-dropdown .p-dropdown-trigger {
+    background: transparent;
+    margin-left: auto !important;
+    color: #6c757d;
+    width: 3rem;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.p-dropdown{
+    width: 100% !important;
+   
+    height: 40px !important;
+    display: flex !important;
+   
+    align-items: center !important;
+}
+// .p-dropdown:nth-child(1){
+//     justify-content: flex-end !important;
+// }
+// .p-dropdown:nth-child(0){
+//     justify-content: flex-start !important;
+// }
+  
+
+  }
+}
+}
+
+
+
+
+
+
+}
+
+.dialogBoxHeadertext {
+  font-weight: 600 !important;
+  font-size: 20px !important;
+  line-height: 26px !important;
+  color: #929292 !important;
+}
+
+.searchContainer {
+  width: 30%;
+  height: 40px;
+  font-family: Poppins;
+}
+
+.buttonDiv {
+  position: relative;
+}
+
+.panelStyleDiv {
+  z-index: 9;
+  top: 5px;
+}
+
+.pagenationContainer {
+  width: 100%;
+  height: 74%;
+  // padding: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  // padding-bottom:5px;
+}
+
+.pagenationContainerBorder {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #bab7b7;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.nameStyle {
+  color: #8066ff;
+  max-width: 163px;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
+
+.nameAndIconDiv {
+  width: 100%;
+  height: 35px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 24px;
+}
+
+.typeIcon {
+  width: 40px;
+  height: 35px;
+  object-fit: contain;
+}
+
+.loaderImageDiv {
+  width: 100%;
+  height: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loaderImage {
+  //  width: 100%;
+  height: 100px;
+}
+
+.dialogBoxButtons {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.businessPartInDialogbox {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 50px;
+}
+
+.dialogContainer {
+  width: 100%;
+  max-height: 100%;
+  padding-top: 20px;
+ 
+}
+
+.businessPartInDialogbox .labelForBusinesLogo {
+  text-transform: capitalize;
+  color: #262626;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0.5px;
+}
+
+.businessPartInDialogbox .imageContainer {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageStorage {
+  width: 88px;
+  height: 88px;
+  object-fit: cover;
+  background: #dedede;
+  border: 1px dashed #262626;
+  border-radius: 50%;
+}
+
+.imageStorageAfterUpload {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 1px solid #dedede;
+}
+
+.updateBusinessLogotext {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  font-family: Poppins !important;
+  color: #8066ff;
+  cursor: pointer;
+  align-items: center;
+}
+
+.makeItemHidden {
+  display: none;
+}
+
+.inputTagDiv {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  // margin-top: 10px;
+}
+
+.businesslabel {
+  text-transform: capitalize;
+  color: #262626;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: Poppins !important;
+  line-height: 21px;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.businessVerticalDiv {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+}
+
+
+.primaryContact {
+
+  margin: 60px 15px 28px 0px !important;
+  border-top: 1px solid #F1F1F1;
+  border-bottom: 1px solid #F1F1F1;
+
+
+  width: 100%;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.primaryContact .pCheading {
+  padding-top: 22px;
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 23px;
+  color: #262626;
+  font-family: Poppins !important;
+}
+
+.primaryContact .pCParagraph {
+  padding-top: 11px;
+  padding-bottom: 21px;
+  font-weight: 400;
+  font-family: Poppins !important;
+  font-size: 16px;
+  line-height: 19px;
+  color: #808080;
+
+}
+
+.primaryContact .firstNameAndLastNameDiv {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  gap: 15px;
+}
+
+.businesslabelEmailId {
+  text-transform: capitalize;
+  color: #262626;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: Poppins !important;
+  line-height: 21px;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  margin-top: 60px;
+}
+
+
+
+
+
+
+.businesslabelFNLN {
+  text-transform: capitalize;
+  color: #262626;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: Poppins !important;
+  line-height: 21px;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.operationsTeam {
+
+  width: 100%;
+  height: auto;
+  
+ //max-height: auto;
+ padding-bottom:110px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+
+.operationsTeam .oTheading {
+  padding-top: 22px;
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 23px;
+  color: #262626;
+  font-family: Poppins !important;
+}
+
+.multiselectDropDownDiv {
+
+  margin-top: 40px;
+  margin-bottom: 5px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.anyElementHide {
+  display: hidden;
+}
+

@@ -1,0 +1,11 @@
+
+<div class="container">
+    <div [ngClass]="!changeSideBarScreenWidthStatus  ? 'sidebarContainer' : 'sidebarAfterContainer'">
+        <app-sidebar (minimizeSideBar)="minimizeSideBarStatus($event)"></app-sidebar>
+    </div>
+    <div [ngClass]="!changeSideBarScreenWidthStatus ? 'subContainer' : 'subContainerAfter'"> 
+        <app-header></app-header>
+        <router-outlet></router-outlet>
+    </div>
+
+</div>

@@ -1,0 +1,6 @@
+<div [formGroup]="FormGroup" [class]="dropDownDiv">
+    <p-multiSelect [options]="listofitems" id="check"   class="multiselectDropDownStyle"   [showHeader]="false"  [(ngModel)]="selecteditems"   [formControlName]="FromControlerName" [optionLabel]="optionalLabelInfo" display="chip"></p-multiSelect>
+    <label for="check" class="otLabelMulti">{{placeHolder}}</label>
+
+</div>
+    

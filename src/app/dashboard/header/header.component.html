@@ -1,0 +1,27 @@
+<div class="container">
+    <a class="bellIconAnchorTag"> <i class="pi pi-bell bellIcon"></i></a>
+    <div class="imageIcon" (click)="op.toggle($event)">
+        <p-avatar [image]="userProfileImage" styleClass="mr-2" size="large" shape="circle"></p-avatar>
+        <i class="pi pi-angle-down arrowDownIcon"></i>
+    </div>
+
+</div>
+<div id="HeaderPanel">
+    <p-overlayPanel #op [showCloseIcon]="false" [showTransitionOptions]="'0.2s'" styleClass="headerPanelStyle"
+        [style]="{width: '250px',padding:'10px',position:'absolute'}">
+        <ng-template pTemplate>
+            <ul class="dropDownUl">
+                <li>
+                    <div class="dropDownImageIcon" (click)="op.hide()">
+                        <p-avatar [image]="userProfileImage" styleClass="mr-2" size="large" shape="circle"></p-avatar>
+                        <p>{{userFullName}}</p>
+                    </div>
+                </li>
+                <li>Profile</li>
+                <li>Preferences</li>
+                <li (click)="logout()">Log Out</li>
+            </ul>
+        </ng-template>
+
+    </p-overlayPanel>
+</div>
