@@ -20,6 +20,7 @@ export class BussinessComponent {
   myBusinessData: any
   first: number = 0
   businessVerticalType: string
+  test:string
   iconPath: string
   showLoader: boolean = false
   typeOfFormInfo: string = ''
