@@ -12,21 +12,21 @@ import { DashboardserviceService } from 'src/app/Services/dashboardservice.servi
 })
 export class BussinessComponent {
   listOfServices = [{ name: 'My Businesses' }, { name: 'All Businesses' }]
-  statusOfFetchingDataFromApi: boolean = false;
-  CheckingForGitHub;
+  statusOfFetchingDataFromApi: boolean = false
+  CheckingForGitHub
   dummy = { name: ' s  ' }
   usersData: any
   allBusinessData: any
   myBusinessData: any
   first: number = 0
   businessVerticalType: string
-  test:string
+  test: string
   iconPath: string
   showLoader: boolean = false
   typeOfFormInfo: string = ''
   saveButtonClickingStatus: boolean = false
   roleOfUser
-  defaultSelectedItemList:Array<any>=[];
+  defaultSelectedItemList: Array<any> = []
 
   // totalRecords: number = 0;
   listOfDataToFetch = [{ name: 'Active' }, { name: 'Archived' }]
@@ -77,7 +77,8 @@ export class BussinessComponent {
   listOfExectivesInUserList: Array<any>
   listOfEditorsInUserList: Array<any>
   listofBusinessData: Array<any>
-
+  editAndDeleteButtonStatus:boolean=false
+ 
   constructor (
     private fb: FormBuilder,
     private dashboardService: DashboardserviceService,
@@ -114,16 +115,18 @@ export class BussinessComponent {
       : (this.activeStatus = 2)
 
     this.callAllMethods();
+
+      
   }
 
-  callAllMethods(){
-         this.getDataFromListStatus1Api();
-         this.getDataFromExecutivePreferences();
-         this.getUserListRoleProducersData();
-         this.getSubscriptionBlends();
-         this.getUserListRoleExecutive();
-         this.getUserListRoleEditors();
-         this.getDataBusinessList();
+  callAllMethods () {
+    this.getDataFromListStatus1Api()
+    this.getDataFromExecutivePreferences()
+    this.getUserListRoleProducersData()
+    this.getSubscriptionBlends()
+    this.getUserListRoleExecutive()
+    this.getUserListRoleEditors()
+    this.getDataBusinessList()
   }
 
   getSubscriptionBlends () {
@@ -340,32 +343,41 @@ export class BussinessComponent {
   //---------------------------------------------------------------------------------------------------------------------------------------------------
 
   openNewForm (typeOfForm) {
-    this.displayBusinessForm = true;
-    this.loadingStatusInfo = false;
-    this.businessLogoPath="";
-    this.saveButtonClickingStatus = false;
+    this.displayBusinessForm = true
+    this.loadingStatusInfo = false
+    this.businessLogoPath = ''
+    this.saveButtonClickingStatus = false
 
-    let roleInfo = JSON.parse(localStorage.getItem('bs_valid'));
-    this.roleOfUser = roleInfo.user.role.name;
-     let roleOfUserName = roleInfo.user.firstName + ' ' + roleInfo.user.lastName
+    let roleInfo = JSON.parse(localStorage.getItem('bs_valid'))
+    this.roleOfUser = roleInfo.user.role.name
+    let roleOfUserName = roleInfo.user.firstName + ' ' + roleInfo.user.lastName
 
-        if(this.roleOfUser === 'producer'){
-              this.defaultSelectedItemList.push(this.listOfProducersInUserList.filter((user) => user.fullName === roleOfUserName)[0]);
-        }
-        else if(this.roleOfUser === 'executive'){
-              this.defaultSelectedItemList.push(this.listOfExectivesInUserList.filter((user) => user.fullName === roleOfUserName)[0]);
-        }
-        else if(this.roleOfUser === 'editor'){
-              this.defaultSelectedItemList.push(this.listOfEditorsInUserList.filter((user)=> user.fullName === roleOfUserName)[0]);
-        }
-        else{
-            this.defaultSelectedItemList=[];
-        }
+    if (this.roleOfUser === 'producer') {
+      this.defaultSelectedItemList.push(
+        this.listOfProducersInUserList.filter(
+          user => user.fullName === roleOfUserName
+        )[0]
+      )
+    } else if (this.roleOfUser === 'executive') {
+      this.defaultSelectedItemList.push(
+        this.listOfExectivesInUserList.filter(
+          user => user.fullName === roleOfUserName
+        )[0]
+      )
+    } else if (this.roleOfUser === 'editor') {
+      this.defaultSelectedItemList.push(
+        this.listOfEditorsInUserList.filter(
+          user => user.fullName === roleOfUserName
+        )[0]
+      )
+    } else {
+      this.defaultSelectedItemList = []
+    }
 
-    this.typeOfFormInfo = typeOfForm;
-    this.addNewBusinessOrOrganization.reset();
-    this.selectedFormType = typeOfForm;
-    this.listOfBusinessVertcials = this.responseFromBusinessVertcalApiUrl;
+    this.typeOfFormInfo = typeOfForm
+    this.addNewBusinessOrOrganization.reset()
+    this.selectedFormType = typeOfForm
+    this.listOfBusinessVertcials = this.responseFromBusinessVertcalApiUrl
   }
 
   fetchSearchingText (data) {
@@ -480,10 +492,7 @@ export class BussinessComponent {
 
     let roleInfo = JSON.parse(localStorage.getItem('bs_valid'))
     this.roleOfUser = roleInfo.user.role.name
-   
 
-        
-        
     fullNameUser =
       this.addNewBusinessOrOrganization.get('firstName').value +
       ' ' +
@@ -521,19 +530,16 @@ export class BussinessComponent {
         res => {
           console.log(res, 'response')
           this.loadingStatusInfo = false
-          this.toasterService.success(`${res['message']}`, '');
-           this.addNewBusinessOrOrganization.reset();
-           this.displayBusinessForm = false;
-           
-           this.callAllMethods();
-           
+          this.toasterService.success(`${res['message']}`, '')
+          this.addNewBusinessOrOrganization.reset()
+          this.displayBusinessForm = false
+
+          this.callAllMethods()
         },
         err => {
           this.loadingStatusInfo = false
         }
       )
-      
-
     } else {
       this.loadingStatusInfo = false
     }
@@ -544,5 +550,9 @@ export class BussinessComponent {
       this.addNewBusinessOrOrganization.invalid &&
       this.saveButtonClickingStatus === true
     )
+  }
+  activateEditAndDeleteDialogBox (edituserInfo) {
+    this.editAndDeleteButtonStatus=true;
+    console.log(edituserInfo)
   }
 }
