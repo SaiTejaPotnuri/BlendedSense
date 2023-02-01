@@ -8,8 +8,8 @@
                     [iconPosition]="'right'" [buttonStyleClass]="'p-button-rounded'" [label]="'New'" [disabled]="false">
                 </app-buttontag>
             </div>
-            <div class="panelStyleDiv">
-                <p-overlayPanel #newForm [showCloseIcon]="false" styleClass="" [showTransitionOptions]="'0.2s'"
+            <div class="panelStyleDiv" id="MyId">
+                <p-overlayPanel #newForm [showCloseIcon]="false"  [showTransitionOptions]="'0.2s'"
                     [style]="{width: '180px',height:'100px'}">
                     <ng-template pTemplate>
                         <ul class="dropDownUl">
@@ -54,10 +54,10 @@
                 [(first)]="first" currentPageReportTemplate=" {first} to {last} of {totalRecords}">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th style="width:25%">business</th>
-                        <th style="width:25%">Type</th>
-                        <th style="width:25%">Business Vertical</th>
-                        <th style="width:25%"> </th>
+                        <th class="headingStyles11">Business</th>
+                        <th class="headingStyles11">Type</th>
+                        <th class="headingStyles11">Business Vertical</th>
+                        <th class="headingStyles11"> </th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-totalRecordsDataToDisplay>
@@ -72,7 +72,7 @@
                         </td>
                         <td>{{totalRecordsDataToDisplay.type}}</td>
                         <td>{{totalRecordsDataToDisplay.businessVertical}}</td>
-                        <td>D</td>
+                        <td class="editAndDeleteButtonStyle" (click)="editAndDeleteForm.toggle($event);activateEditAndDeleteDialogBox(totalRecordsDataToDisplay)">...</td>
                     </tr>
                 </ng-template>
             </p-table>
@@ -80,6 +80,20 @@
 
         </div>
     </div>
+
+</div>
+<div  id="test12345">
+    <p-overlayPanel #editAndDeleteForm  [showCloseIcon]="false"   [showTransitionOptions]="'0.2s'"
+        [style]="{width: '180px',height:'100px'}" styleClass="overlayOvewrite">
+        <ng-template pTemplate>
+            <ul class="dropDownUlEdit">
+                <li (click)="editAndDeleteForm.hide()">Edit</li>
+                <li (click)="editAndDeleteForm.hide()">Archieve</li>
+            </ul>
+        </ng-template>
+    
+    </p-overlayPanel>
+
 
 </div>
 

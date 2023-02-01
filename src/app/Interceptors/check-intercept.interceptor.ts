@@ -11,14 +11,16 @@ import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class CheckInterceptInterceptor implements HttpInterceptor {
+  token: string;
   constructor(private toasterService: ToastrService) {}
 
-  token = localStorage.getItem('token') || '';
+  
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
+    this.token = localStorage.getItem('token') || ''
     request = request.clone({
       setHeaders: {
         Authorization: `Bearer ${this.token}`,
