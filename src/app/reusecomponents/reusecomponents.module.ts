@@ -10,6 +10,7 @@ import { DropdowncomponentComponent } from './dropdowncomponent/dropdowncomponen
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiselectdropdownComponent } from './multiselectdropdown/multiselectdropdown.component';
 import {MultiSelectModule} from 'primeng/multiselect';
+import { IconComponent } from './icon/icon.component';
 
 
 
@@ -22,6 +23,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
     ErrormessageComponent,
     DropdowncomponentComponent,
     MultiselectdropdownComponent,
+    IconComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,9 @@ import {MultiSelectModule} from 'primeng/multiselect';
     ButtontagComponent,
     ErrormessageComponent,
     DropdowncomponentComponent,
-    MultiselectdropdownComponent
+    MultiselectdropdownComponent,
+    IconComponent
+
   ],
 })
 export class ReusecomponentsModule {}

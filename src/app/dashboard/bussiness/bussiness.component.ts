@@ -27,6 +27,7 @@ export class BussinessComponent {
   saveButtonClickingStatus: boolean = false
   roleOfUser
   defaultSelectedItemList: Array<any> = []
+  archieveIconPath = 'assets/images/archieveIcon.svg'
 
   // totalRecords: number = 0;
   listOfDataToFetch = [{ name: 'Active' }, { name: 'Archived' }]
@@ -77,8 +78,10 @@ export class BussinessComponent {
   listOfExectivesInUserList: Array<any>
   listOfEditorsInUserList: Array<any>
   listofBusinessData: Array<any>
-  editAndDeleteButtonStatus:boolean=false
- 
+  editAndDeleteButtonStatus: boolean = false
+  editUserInfo
+  editFormStatus: boolean = false
+
   constructor (
     private fb: FormBuilder,
     private dashboardService: DashboardserviceService,
@@ -114,9 +117,7 @@ export class BussinessComponent {
       ? (this.activeStatus = 1)
       : (this.activeStatus = 2)
 
-    this.callAllMethods();
-
-      
+    this.callAllMethods()
   }
 
   callAllMethods () {
@@ -224,6 +225,7 @@ export class BussinessComponent {
 
   fetchDataFromApi () {
     // this.showLoader = true;
+
     if (this.statusOfFetchingDataFromApi) {
       this.first = 0
       let userInfoObject
@@ -279,7 +281,8 @@ export class BussinessComponent {
           icon: this.iconPath,
           name: user.name,
           type: this.selectedInfoBusinessOrOrganization,
-          businessVertical: this.businessVerticalType
+          businessVertical: this.businessVerticalType,
+          allData: user
         }
 
         this.totalRecordsDataToDisplay.push(userInfoObject)
@@ -345,6 +348,7 @@ export class BussinessComponent {
   openNewForm (typeOfForm) {
     this.displayBusinessForm = true
     this.loadingStatusInfo = false
+    this.editFormStatus = false
     this.businessLogoPath = ''
     this.saveButtonClickingStatus = false
 
@@ -551,8 +555,46 @@ export class BussinessComponent {
       this.saveButtonClickingStatus === true
     )
   }
-  activateEditAndDeleteDialogBox (edituserInfo) {
-    this.editAndDeleteButtonStatus=true;
-    console.log(edituserInfo)
+  activateEditAndDeleteDialogBox (edituserInfoData) {
+    this.editAndDeleteButtonStatus = true
+    this.editUserInfo = edituserInfoData
+  }
+
+  enableformForEdit () {
+    this.editFormStatus = true
+    this.selectedFormType = ''
+    this.displayBusinessForm = true
+    this.businessLogoPath = this.editUserInfo.icon
+    this.listOfBusinessVertcials = this.responseFromBusinessVertcalApiUrl
+    let businessVerticalName = this.editUserInfo.businessVertical[0]
+    let businessVerticalObject = this.responseFromBusinessVertcalApiUrl.filter(
+      bv => bv.name === businessVerticalName
+    )
+    let subscriptionBlendsData = this.listOfSubscriptionBlends.filter(sb => sb.id === this.editUserInfo.allData.subscriptionBlends[0].id)
+    let firstNameInfo = this.editUserInfo.allData.userBusiness[0].user.firstName;
+    let lastNameInfo = this.editUserInfo.allData.userBusiness[0].user.lastName
+    let emailidData = this.editUserInfo.allData.userBusiness[0].user.email
+
+
+
+
+    // subscriptionBlendsData.push(this.editUserInfo.allData.subscriptionBlends)
+
+    
+    let editedData = {
+      businessLogo1: this.businessLogoPath,
+      businessName1: this.editUserInfo.name,
+      businessVertical1: businessVerticalObject[0],
+      subscriptionBlends1: subscriptionBlendsData[0],
+      firstName : firstNameInfo,
+      lastName : lastNameInfo,
+      emailIdInfo : emailidData
+
+    }
+
+    this.addNewBusinessOrOrganization.patchValue(editedData)
+    
+    
+    console.log(this.editUserInfo, 'Form Edit Function')
   }
 }
