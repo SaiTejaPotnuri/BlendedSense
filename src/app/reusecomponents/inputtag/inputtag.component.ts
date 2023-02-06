@@ -17,6 +17,7 @@ export class InputtagComponent implements OnInit {
   @Input() passwordId: string = '';
   @Input() styleClass: string;
   @Input() hideItem;
+  @Input() readOnlyStatus;
   @Output() showSearchingText = new EventEmitter<any>();
 
   constructor() {}
@@ -41,6 +42,11 @@ export class InputtagComponent implements OnInit {
   }
 
   showSearchingTextChanged(textEntered) {
+
+    
+    
+
+
     this.showSearchingText.emit(textEntered.target.value);
   }
 

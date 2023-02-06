@@ -201,7 +201,7 @@ li:nth-child(2):hover {
     }
   }
 
-  .businessVerticalDiv {
+  .businessVerticalDiv,.businessStatusDiv {
     .p-dropdown {
       display: inline-flex;
       cursor: pointer;
@@ -551,6 +551,15 @@ li:nth-child(2):hover {
   display: flex;
   flex-direction: column;
   margin-top: 60px;
+}
+
+.businessStatusDiv {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+  margin-bottom: auto;
 }
 
 

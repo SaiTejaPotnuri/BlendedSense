@@ -171,10 +171,10 @@
                         <div class="inputTagDiv">
                             <label for="firstName" class="businesslabelFNLN">First Name *</label>
                             <app-inputtag [typeOfInput]="'text'" [styleClass]="'p-input-icon-right'"
-                                [label]="' First Name * '"
+                                [label]="' First Name * '" [readOnlyStatus]="readOnlyStatusValue" [passwordId]="'FN1'"
                                 [fieldIcon]="checkIfErrorOrNotInFormDialogBox('firstName',this.addNewBusinessOrOrganization) === true ?'pi pi-exclamation-circle' : null"
                                 [FormGroup]="addNewBusinessOrOrganization" [name]="'firstName'"></app-inputtag>
-                            <app-errormessage [styles]="'p-error block'"
+                            <app-errormessage [styles]="'p-error block'" 
                                 [ststusOfErrorMessage]="checkIfErrorOrNotInFormDialogBox('firstName',this.addNewBusinessOrOrganization)"
                                 [errorText]="' Please provide valid first name '"></app-errormessage>
                         </div>
@@ -183,7 +183,7 @@
                         <div class="inputTagDiv">
                             <label for="lastName" class="businesslabelFNLN">Last Name *</label>
                             <app-inputtag [typeOfInput]="'text'" [styleClass]="'p-input-icon-right'"
-                                [label]="' Last Name * '"
+                                [label]="' Last Name * '" [readOnlyStatus]="readOnlyStatusValue" [passwordId]="'LN1'"
                                 [fieldIcon]="checkIfErrorOrNotInFormDialogBox('lastName',this.addNewBusinessOrOrganization) === true ?'pi pi-exclamation-circle' : null"
                                 [FormGroup]="addNewBusinessOrOrganization" [name]="'lastName'"></app-inputtag>
                             <app-errormessage [styles]="'p-error block'"
@@ -198,7 +198,7 @@
 
                         <label for="EmailAddress" class="businesslabelEmailId">Email Address*</label>
                         <app-inputtag [typeOfInput]="'email'" [styleClass]="'p-input-icon-right'"
-                            [label]="' Email Address* '"
+                            [label]="' Email Address* '" [readOnlyStatus]="readOnlyStatusValue" [passwordId]="'EMAIL1'"
                             [fieldIcon]="checkIfErrorOrNotInFormDialogBox('emailIdInfo',this.addNewBusinessOrOrganization) === true ?'pi pi-exclamation-circle' : null"
                             [FormGroup]="addNewBusinessOrOrganization" [name]="'emailIdInfo'"></app-inputtag>
                         <app-errormessage [styles]="'p-error block'"
@@ -211,6 +211,7 @@
                 <!-- Operation Team Part -->
                 <div class="operationsTeam">
                     <h1 class="oTheading">Operations Team</h1>
+                    
                     <div class="multiselectDropDownDiv">
                         <app-multiselectdropdown  [listofitems]="listOfProducersInUserList"
                              [FormGroup]="addNewBusinessOrOrganization" [selecteditems]="roleOfUser === 'producer' ? defaultSelectedItemList : ''"
@@ -231,6 +232,16 @@
                     <app-dropdowncomponent [itemsList]="listOfProducersInUserList" [placeHolder]="'  '" [displayLabel]="'Point of Contact'" [Id]="'dropdownPOC'" [optinoalLabelInfo]="'fullName'"
                         [FormGroup]="addNewBusinessOrOrganization" [dropDownIcondisplay]="'pi pi-chevron-down'" [dropDownDiv]="'p-float-label'" [name]="'businessList'"></app-dropdowncomponent>
                 </div>
+            </div>     
+               
+            <div class="businessStatusDiv" *ngIf="editFormStatus === true">
+                <label for="dropdownStatusDiv" class="businesslabel"> Status </label>
+                <app-dropdowncomponent [dropDownIcondisplay]="'pi pi-sort-down'" [itemsList]="listOfDataToFetch"
+                     [optinoalLabelInfo]="'name'" [FormGroup]="addNewBusinessOrOrganization"
+                    [name]="'statusTypeValue'"></app-dropdowncomponent>
+                <app-errormessage [styles]="'p-error block'"
+                    [ststusOfErrorMessage]="checkIfErrorOrNotInFormDialogBox('statusTypeValue',this.addNewBusinessOrOrganization)"
+                    [errorText]="' Please select status '"></app-errormessage>
             </div>
 
 
@@ -258,7 +269,7 @@
                 <div class="saveButtonDiv" *ngIf="editFormStatus === true">
                     <app-buttontag [type]="'submit'" [loadingStatus]="loadingStatusInfo"
                         [buttonStyleClass]="'p-button-rounded p-button-purple '" [label]="' Update '"
-                         [disabled]="checkFormValidAndButtonClicked()"></app-buttontag>
+                       (buttonClickStatus)="updateBusinessUserData()"   [disabled]="checkFormValidAndButtonClicked()"></app-buttontag>
                 </div>
             </div>
         </ng-template>

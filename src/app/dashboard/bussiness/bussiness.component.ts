@@ -30,7 +30,7 @@ export class BussinessComponent {
   archieveIconPath = 'assets/images/archieveIcon.svg'
 
   // totalRecords: number = 0;
-  listOfDataToFetch = [{ name: 'Active' }, { name: 'Archived' }]
+  listOfDataToFetch = [{ name: 'Active',id:1 }, { name: 'Archived',id:2 }]
   listofTypeOfInformation = [
     { name: 'All Types' },
     { name: 'Business' },
@@ -61,7 +61,7 @@ export class BussinessComponent {
   responseFromApiListStatus2: any
   businessLogoPathBinary
   loadingStatusInfo: boolean = false
-
+  editedData
   businessVertcalApiUrl
   responseFromBusinessVertcalApiUrl: any
   businessVertcalTypesWithIds: any
@@ -81,6 +81,7 @@ export class BussinessComponent {
   editAndDeleteButtonStatus: boolean = false
   editUserInfo
   editFormStatus: boolean = false
+  readOnlyStatusValue:boolean = false;
 
   constructor (
     private fb: FormBuilder,
@@ -108,7 +109,8 @@ export class BussinessComponent {
       contentProducers: [''],
       productionMangers: [''],
       editorsList: [''],
-      businessList: ['']
+      businessList: [''],
+      statusTypeValue : ['']
     })
   }
 
@@ -299,8 +301,7 @@ export class BussinessComponent {
       }
 
       if (this.fetchedSearchBoxData !== '') {
-        console.log('Came inside ')
-
+       
         this.totalRecordsDataToDisplay = this.totalRecordsDataToDisplay.filter(
           user =>
             user.name
@@ -347,8 +348,11 @@ export class BussinessComponent {
 
   openNewForm (typeOfForm) {
     this.displayBusinessForm = true
+    this.readOnlyStatusValue = false
+    this.addNewBusinessOrOrganization.reset();
+    this.defaultSelectedItemList=[];
+    this.editFormStatus=false
     this.loadingStatusInfo = false
-    this.editFormStatus = false
     this.businessLogoPath = ''
     this.saveButtonClickingStatus = false
 
@@ -362,6 +366,8 @@ export class BussinessComponent {
           user => user.fullName === roleOfUserName
         )[0]
       )
+      
+      
     } else if (this.roleOfUser === 'executive') {
       this.defaultSelectedItemList.push(
         this.listOfExectivesInUserList.filter(
@@ -390,6 +396,7 @@ export class BussinessComponent {
   }
   cancelDialog () {
     this.displayBusinessForm = false
+    this.editFormStatus = false
   }
 
   fetchSelectedImage (e) {
@@ -466,7 +473,9 @@ export class BussinessComponent {
     let pointOfContactIdInfo = this.checkDataAvailableOrNot(
       this.addNewBusinessOrOrganization,
       'businessList'
-    )
+    )    
+
+
     let businessTypeIdInfo = this.checkDataAvailableOrNot(
       this.addNewBusinessOrOrganization,
       'businessVertical1'
@@ -562,6 +571,7 @@ export class BussinessComponent {
 
   enableformForEdit () {
     this.editFormStatus = true
+    this.readOnlyStatusValue = true
     this.selectedFormType = ''
     this.displayBusinessForm = true
     this.businessLogoPath = this.editUserInfo.icon
@@ -575,26 +585,99 @@ export class BussinessComponent {
     let lastNameInfo = this.editUserInfo.allData.userBusiness[0].user.lastName
     let emailidData = this.editUserInfo.allData.userBusiness[0].user.email
 
+//Producers Data
+    let producersObject = this.editUserInfo.allData.producers.map(prod => prod.id);
+    let producersData =  producersObject.length !== 0 ? this.listOfProducersInUserList.filter(producers => producersObject.indexOf(producers.id) !== -1 ) : []
 
+// Executives Data
+      let executivesObject = this.editUserInfo.allData.executives.map(exe => exe.id)
+      let executiveData = executivesObject.length !==0 ? this.listOfExectivesInUserList.filter(executer => executivesObject.indexOf(executer.id) !== -1 ) : [];   
+// Editors Data 
 
-
-    // subscriptionBlendsData.push(this.editUserInfo.allData.subscriptionBlends)
-
-    
-    let editedData = {
+      let editorsObject = this.editUserInfo.allData.editors.map(edi => edi.id)       
+      let editorsData1 = editorsObject.length !=0 ? this.listOfEditorsInUserList.filter(editor => editorsObject.indexOf(editor.id) !== -1) : []
+      
+// Point Of Contact
+      let pocId = this.editUserInfo.allData.pointOfContactId != null ?  parseInt(this.editUserInfo.allData.pointOfContactId) : -1;
+      let pocData = this.listOfProducersInUserList.filter(poc => poc.id === pocId)
+      let statusValue1 = this.listOfDataToFetch.filter(sta => sta.id === this.editUserInfo.allData.status);
+   
+    this.editedData = {
       businessLogo1: this.businessLogoPath,
       businessName1: this.editUserInfo.name,
       businessVertical1: businessVerticalObject[0],
       subscriptionBlends1: subscriptionBlendsData[0],
       firstName : firstNameInfo,
       lastName : lastNameInfo,
-      emailIdInfo : emailidData
-
+      emailIdInfo : emailidData,
+      contentProducers : producersData,
+      productionMangers : executiveData,
+      editorsList : editorsData1,
+      businessList : pocData[0],
+      statusTypeValue : statusValue1[0],
     }
 
-    this.addNewBusinessOrOrganization.patchValue(editedData)
+    this.addNewBusinessOrOrganization.patchValue(this.editedData)
+    console.log(this.editUserInfo);
+    console.log(this.editedData);
     
     
-    console.log(this.editUserInfo, 'Form Edit Function')
+    
   }
+
+
+  updateBusinessUserData(){
+
+    this.editFormStatus= false;
+    this.displayBusinessForm = false
+    console.log(this.editUserInfo,"In Update Method");
+    console.log(this.editedData);
+
+    let idInfo = this.editUserInfo.allData.id || -1;
+    let nameOfBusiness = this.addNewBusinessOrOrganization.get('businessName1').value || ""
+    let websiteInfo =  this.editUserInfo.allData.website || "";
+    let businessTypeIdInfo = this.addNewBusinessOrOrganization.get('businessVertical1').value.id
+    let instagramInfo = this.editUserInfo.allData.instagram;
+    let descriptionInfo = this.editUserInfo.allData.description;
+    let pinterestInfo = this.editUserInfo.allData.pinterest;
+    let callScheduledInfo = this.editUserInfo.allData.callScheduled;
+    let creditsInfo = this.editUserInfo.allData.credits;
+    let typeInfo = this.editUserInfo.allData.type;
+    let pointOfContactIdInfo = this.addNewBusinessOrOrganization.get('businessList').value.id
+    let statusInfo = this.addNewBusinessOrOrganization.get('statusTypeValue').value.id
+
+
+    
+
+
+
+    let fdForUpdation = new FormData()
+
+    fdForUpdation.append('id',idInfo)
+    fdForUpdation.append('name', nameOfBusiness)
+    fdForUpdation.append('website', websiteInfo)
+    fdForUpdation.append('businessTypeId', businessTypeIdInfo)
+    fdForUpdation.append('instagram', instagramInfo)
+    fdForUpdation.append('description', descriptionInfo)
+    fdForUpdation.append('pinterest', pinterestInfo)
+    fdForUpdation.append('callScheduled', callScheduledInfo)
+    fdForUpdation.append('credits', creditsInfo)
+    fdForUpdation.append('type', typeInfo)
+    fdForUpdation.append('pointOfContactId', pointOfContactIdInfo)
+    fdForUpdation.append('status', pointOfContactIdInfo)
+
+
+
+
+
+    
+    
+
+  }
+
+
+
+
+
+
 }
