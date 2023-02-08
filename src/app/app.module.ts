@@ -9,6 +9,7 @@ import { ReusecomponentsModule } from './reusecomponents/reusecomponents.module'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CheckInterceptInterceptor } from './Interceptors/check-intercept.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 
 
@@ -21,6 +22,7 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule,
     AuthModule,
     ReusecomponentsModule,
+    DashboardModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,

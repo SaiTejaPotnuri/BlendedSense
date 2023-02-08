@@ -26,6 +26,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
     ContainerComponent,
     BussinessComponent,
     SidebarComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -40,7 +41,8 @@ import {MultiSelectModule} from 'primeng/multiselect';
     DialogModule,
     ReactiveFormsModule,
     FormsModule,
-    MultiSelectModule
+    MultiSelectModule,
+
   ],
 })
 export class DashboardModule {}

@@ -18,6 +18,7 @@ export class DashboardserviceService {
   apiUrlUserListRoleEditor:string;
   apiUrlBusinessList:string;
   apiUrlPostDataCreatingNewUser:string;
+  updateBusinessTeamDataApiUrl:string;
 
   getResponseFromProjectsBusinessListStatus1() {
     this.apiUrlListStatus1 = `https://stage.blendedsense.com/api/projects/businesses/list?status=1`;
@@ -69,6 +70,10 @@ export class DashboardserviceService {
         return this.http.post(this.apiUrlPostDataCreatingNewUser,formData);
   }
 
+  updateDaraInThisApi(updateInfo){
+            this.updateBusinessTeamDataApiUrl= 'https://stage.blendedsense.com/api/projects/businesses/update'
+            return this.http.put(this.updateBusinessTeamDataApiUrl,updateInfo);
+  }
 
 
 

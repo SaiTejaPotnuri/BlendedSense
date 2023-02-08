@@ -17,7 +17,20 @@ export class MultiselectdropdownComponent {
   @Input() dropDownDiv;
   @Input() labelStyle;
   @Input() optionalLabelInfo;
+  @Input() idInfo;
+  multiDropDownFirstElement
   @Output() selectedItemsList = new EventEmitter<string>()
+
+
+  // constructor(){
+  //   let n=0;
+  //    this.multiDropDownFirstElement = document.getElementById('removingItemDisable')
+  //    console.log(this.multiDropDownFirstElement);
+
+  // }
+  
+
+
 
 
 

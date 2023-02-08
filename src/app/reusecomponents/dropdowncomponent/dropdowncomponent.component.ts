@@ -27,5 +27,6 @@ export class DropdowncomponentComponent implements OnInit {
 
   fetchSelectedItems(itemSelected: string) {
     this.selectedItemInfo.emit(itemSelected);
+    
   }
 }

@@ -1,4 +1,5 @@
 <div [formGroup]="FormGroup" [class]="styleClass" class="container">
      <i [class]="fieldIcon" (click)="showPassword()" style="cursor: pointer;"></i>
-     <input [type]="typeOfInput" [placeholder]="placeholder"   (keyup)="showSearchingTextChanged($event)" [id]="passwordId" class="inputtagStyle"  pInputText [formControlName]="name"/> 
+     
+     <input [type]="typeOfInput" [placeholder]="placeholder"   (keyup)="showSearchingTextChanged($event)" [id]="passwordId" class="inputtagStyle"  pInputText [formControlName]="name" [readonly]="readOnlyStatus"/> 
 </div>
