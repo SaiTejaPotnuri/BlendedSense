@@ -87,8 +87,9 @@
         [style]="{height:'100px'}" styleClass="overlayOvewrite">
         <ng-template pTemplate>
             <ul class="dropDownUlEdit">
-                <li (click)="editAndDeleteForm.hide();enableformForEdit(totalRecordsDataToDisplay)"><div class="editFormDiv"><app-icon [iconStyle]="'pi pi-file-edit editAndDeleteIcon'"></app-icon> <h1>Edit</h1> </div></li>
-                <li (click)="editAndDeleteForm.hide();archeiveDataFromMyBusiness(totalRecordsDataToDisplay)"><div class="editFormDiv"><img [src]="archieveIconPath" alt="Noicon" class="archieveIcon" /> <h1>Archieve</h1> </div></li>
+                <li *ngIf="displayAddToMyBusinessStatus === false" (click)="editAndDeleteForm.hide();addBusinessToMyBusiness()"><div class="editFormDiv"><app-icon [iconStyle]="'pi pi-plus-circle editAndDeleteIcon'"></app-icon> <h1> Add to my businesses </h1> </div></li>
+                <li (click)="editAndDeleteForm.hide();enableformForEdit()"><div class="editFormDiv"><app-icon [iconStyle]="'pi pi-file-edit editAndDeleteIcon'"></app-icon> <h1>Edit</h1> </div></li>
+                <li (click)="editAndDeleteForm.hide();archeiveDataFromMyBusiness()"><div class="editFormDiv"><img [src]="this.editUserInfo.allData.status === 1 ? archieveIconPath : deleteRestore " alt="Noicon" class="archieveIcon" /> <h1 *ngIf="this.editUserInfo.allData.status === 1" class="h1TagInArchieve">Archive Business</h1> <h1 *ngIf="this.editUserInfo.allData.status !== 1" class="h1TagInActive">Active Business</h1> </div></li>
             </ul>
         </ng-template>
     

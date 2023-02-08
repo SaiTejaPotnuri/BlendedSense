@@ -288,8 +288,10 @@ li:nth-child(2):hover {
   }
 
   .overlayOvewrite {
-    width: 13vw !important;
-    max-width: 13vw !important;
+    width: fit-content !important;
+    max-width: fit-content !important;
+    height: fit-content !important ;
+    max-height: fit-content !important;
     position: absolute !important;
     margin-left: -1% !important;
     margin-top: -0.5% !important;
@@ -707,7 +709,7 @@ li:nth-child(2):hover {
 .dropDownUlEdit li {
   list-style: none;
   width: 100%;
-  height: 60%;
+  height: 32% !important;
   padding: 5px 15px;
   font-size: 16px !important;
   font-family: Poppins !important;
@@ -718,9 +720,9 @@ li:nth-child(2):hover {
   color: #262626;
 
 }
-.dropDownUlEdit li:nth-child(2){
+.dropDownUlEdit li:nth-child(3){
     border-bottom: none !important;
-        color: #FF0000 !important;
+      
         gap: 10px !important;
 
 }
@@ -756,7 +758,9 @@ li:nth-child(2):hover {
 
 .archieveIcon{
   width: 24px;
-    height: 14px;
+    height: 16px;
+    object-fit: fill;
+    
 }
 
 .editFormDiv{
@@ -766,4 +770,25 @@ li:nth-child(2):hover {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+}
+
+.h1TagInArchieve{
+    color: #FF0000 !important;
+     font-family: Poppins !important;
+  cursor: pointer;
+  font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+
+}
+.h1TagInActive{
+    color: #262626;
+     font-family: Poppins !important;
+  cursor: pointer;
+  font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+
 }

@@ -29,6 +29,8 @@ export class BussinessComponent {
   roleOfUser
   defaultSelectedItemList: Array<any> = []
   archieveIconPath = 'assets/images/archieveIcon.svg'
+  deleteRestore= 'assets/images/delete_restore.svg'
+
 
   // totalRecords: number = 0;
   listOfDataToFetch = [
@@ -86,6 +88,8 @@ export class BussinessComponent {
   editUserInfo
   editFormStatus: boolean = false
   readOnlyStatusValue: boolean = false
+  count:number =0;
+  displayAddToMyBusinessStatus:boolean=false;
 
   constructor (
     private fb: FormBuilder,
@@ -213,7 +217,8 @@ export class BussinessComponent {
       .getResponseFromProjectsBusinessListStatus1()
       .subscribe(res => {
         this.responseFromApiListStatus1 = Object.entries(res)[0][1]
-        this.getDataFromListStatus2Api()
+          this.count += 1
+          this.count === 1 ? this.getDataFromListStatus2Api() : this.fetchDataFromApi();   
       })
   }
 
@@ -326,6 +331,7 @@ export class BussinessComponent {
 
   checkTypeOfService (selectedService) {
     this.showLoader = true
+
     setTimeout(() => {
       this.selectedBussiness = selectedService.name
       this.fetchDataFromApi()
@@ -333,12 +339,14 @@ export class BussinessComponent {
     }, 1000)
   }
   checkType (selectedType) {
-    this.showLoader = true
-    setTimeout(() => {
+      this.showLoader = true
       this.slectedTypeStatus = selectedType.name
-      this.fetchDataFromApi()
-      this.showLoader = false
-    }, 1000)
+     
+      console.log(this.selectedBussiness,"selectedBussiness");
+      
+     this.slectedTypeStatus === "Active" ? this.getDataFromListStatus1Api() : this.getDataFromListStatus2Api()
+      // this.fetchDataFromApi()
+      // this.showLoader = false
   }
 
   fetchParticularTypeInfo (selectedTypeOfInfo) {
@@ -569,7 +577,23 @@ export class BussinessComponent {
   activateEditAndDeleteDialogBox (edituserInfoData) {
     this.editAndDeleteButtonStatus = true
     this.editUserInfo = edituserInfoData
+
+    this.displayAddToMyBusinessStatus = this.editUserInfo.allData.assigned;
   }
+
+addBusinessToMyBusiness(){
+
+    let businessIdData = this.editUserInfo.allData.id;
+
+    this.dashboardService.addBusinessToMyBusinessApi(businessIdData).subscribe(res=>{
+          console.log(res);
+          
+    })
+
+}
+
+
+
 
   enableformForEdit () {
     this.editFormStatus = true
@@ -582,9 +606,24 @@ export class BussinessComponent {
     let businessVerticalObject = this.responseFromBusinessVertcalApiUrl.filter(
       bv => bv.name === businessVerticalName
     )
-    let subscriptionBlendsData = this.listOfSubscriptionBlends.filter(
+    let subscriptionBlendsInfo;
+    let subscriptionBlendsData
+
+
+      if(this.editUserInfo.allData.subscriptionBlends.length !=0){
+         subscriptionBlendsInfo = this.listOfSubscriptionBlends.filter(
       sb => sb.id === this.editUserInfo.allData.subscriptionBlends[0].id
     )
+      }
+      else{
+            subscriptionBlendsInfo=[]
+      }
+
+
+      subscriptionBlendsInfo.length !==0 ? subscriptionBlendsData =subscriptionBlendsInfo[0] : subscriptionBlendsData=[]
+      
+
+    
     let firstNameInfo = this.editUserInfo.allData.userBusiness[0].user.firstName
     let lastNameInfo = this.editUserInfo.allData.userBusiness[0].user.lastName
     let emailidData = this.editUserInfo.allData.userBusiness[0].user.email
@@ -634,7 +673,7 @@ export class BussinessComponent {
       businessLogo1: this.businessLogoPath,
       businessName1: this.editUserInfo.name,
       businessVertical1: businessVerticalObject[0],
-      subscriptionBlends1: subscriptionBlendsData[0],
+      subscriptionBlends1: subscriptionBlendsData,
       firstName: firstNameInfo,
       lastName: lastNameInfo,
       emailIdInfo: emailidData,
@@ -651,6 +690,8 @@ export class BussinessComponent {
   updateBusinessUserData () {
     //  this.editFormStatus= false;
     //  this.displayBusinessForm = false
+    this.loadingStatusInfo = true
+
     let date = new Date().toJSON()
     this.updateButtonClickingStatus = true
     let idInfo = this.editUserInfo.allData.id || -1
@@ -758,17 +799,20 @@ export class BussinessComponent {
     if (this.addNewBusinessOrOrganization.valid) {
       this.dashboardService.updateDaraInThisApi(fdForUpdation).subscribe(
         res => {
-          this.toasterService.success(`${res['message']}`, '')
           
-            setTimeout(()=>{
-              
-              this.displayBusinessForm = false
-              this.addNewBusinessOrOrganization.reset()
-              this.editFormStatus = false
-            },2000)
 
-            this.getDataFromListStatus1Api()  
-          
+          this.toasterService.success(`${res['message']}`, '')
+
+          setTimeout(() => {
+            this.displayBusinessForm = false
+            this.addNewBusinessOrOrganization.reset()
+            this.editFormStatus = false
+          }, 1200)
+
+            this.slectedTypeStatus === "Active" ? this.getDataFromListStatus1Api() : this.getDataFromListStatus2Api()
+         
+       //   this.loadingStatusInfo = false
+
         },
         err => {
           console.log(err, 'Error')
@@ -779,103 +823,75 @@ export class BussinessComponent {
     }
   }
 
+  archeiveDataFromMyBusiness () {
+    // statusTypeValue from addnewOrganization formgroup to get active or Archieve
+    // we can do by a 2 lines add new key at particular position (role) and changing status value
 
-    archeiveDataFromMyBusiness(){
-
-
-      // statusTypeValue from addnewOrganization formgroup to get active or Archieve
-      // we can do by a 2 lines add new key at particular position (role) and changing status value
-
-         let roleInf = JSON.parse(localStorage.getItem('bs_valid'))
+    let roleInf = JSON.parse(localStorage.getItem('bs_valid'))
     this.roleOfUser = roleInf.user.role.name
-
-
-      let fdForMoveItemToArchieve = new FormData()
-
-        fdForMoveItemToArchieve.append('assigned',this.editUserInfo.allData.assigned)
-        fdForMoveItemToArchieve.append('bannerImage', this.editUserInfo.allData.bannerImage)
-        fdForMoveItemToArchieve.append('businessDetails', this.editUserInfo.allData.businessDetails)
-        fdForMoveItemToArchieve.append('businessTeam', this.editUserInfo.allData.businessTeam)
-        fdForMoveItemToArchieve.append('businessTypeId', this.editUserInfo.allData.businessTypeId)
-        fdForMoveItemToArchieve.append('callScheduled', this.editUserInfo.allData.callScheduled)
-        fdForMoveItemToArchieve.append('contactNumber', this.editUserInfo.allData.contactNumber)
-        fdForMoveItemToArchieve.append('contactOwnerName', this.editUserInfo.allData.contactOwnerName)
-        fdForMoveItemToArchieve.append('createdAt', this.editUserInfo.allData.createdAt)
-        fdForMoveItemToArchieve.append('credits', this.editUserInfo.allData.credits)
-        fdForMoveItemToArchieve.append('description', this.editUserInfo.allData.description)
-        fdForMoveItemToArchieve.append('details', this.editUserInfo.allData.details)
-        fdForMoveItemToArchieve.append('editors', this.editUserInfo.allData.editors)
-        fdForMoveItemToArchieve.append('executives', this.editUserInfo.allData.executives)
-        fdForMoveItemToArchieve.append('facebook', this.editUserInfo.allData.facebook)
-        fdForMoveItemToArchieve.append('id', this.editUserInfo.allData.id)
-        fdForMoveItemToArchieve.append('instagram', this.editUserInfo.allData.instagram)
-        fdForMoveItemToArchieve.append('linkedin', this.editUserInfo.allData.linkedin)
-        fdForMoveItemToArchieve.append('massivePortalId', this.editUserInfo.allData.massivePortalId)
-        fdForMoveItemToArchieve.append('name', this.editUserInfo.allData.name)
-        fdForMoveItemToArchieve.append('phoneNumber', this.editUserInfo.allData.phoneNumber)
-        fdForMoveItemToArchieve.append('pinterest', this.editUserInfo.allData.pinterest)
-        fdForMoveItemToArchieve.append('pointOfContactId', this.editUserInfo.allData.pointOfContactId)
-        fdForMoveItemToArchieve.append('priceRangeId', this.editUserInfo.allData.priceRangeId)
-        fdForMoveItemToArchieve.append('producers', this.editUserInfo.allData.producers)
-        fdForMoveItemToArchieve.append('project', this.editUserInfo.allData.project)
-        fdForMoveItemToArchieve.append('projectTeam', this.editUserInfo.allData.projectTeam)
-        fdForMoveItemToArchieve.append('projects', this.editUserInfo.allData.projects)
-        fdForMoveItemToArchieve.append('role',this.roleOfUser)
-        fdForMoveItemToArchieve.append('smallImage', this.editUserInfo.allData.smallImage)
-        fdForMoveItemToArchieve.append('status', "2")
-        fdForMoveItemToArchieve.append('subscriptionBlends', this.editUserInfo.allData.subscriptionBlends)
-        fdForMoveItemToArchieve.append('thumbnail', this.editUserInfo.allData.thumbnail)
-        fdForMoveItemToArchieve.append('timeRangeId', this.editUserInfo.allData.timeRangeId)
-        fdForMoveItemToArchieve.append('type', this.editUserInfo.allData.type)
-        fdForMoveItemToArchieve.append('updatedAt', this.editUserInfo.allData.updatedAt)
-        fdForMoveItemToArchieve.append('userBusiness', this.editUserInfo.allData.userBusiness)
-        fdForMoveItemToArchieve.append('website', this.editUserInfo.allData.website)
-        fdForMoveItemToArchieve.append('youtube', this.editUserInfo.allData.youtube)
-
-
-
-       this.dashboardService.updateDaraInThisApi(fdForMoveItemToArchieve).subscribe(res=>{
-              this.toasterService.success(`${res['message']}`, '')
-              this.getDataFromListStatus1Api()
-
-
-       })
-     
-
-
-
-        
-
-
-        
-
-        
-
-
-        
-
-        
-        
-
-        
-
-
-        
-        
-
-
-        
-
-
-        
-
-
-
+    let ststusInfo = this.editUserInfo.allData.status === 1 ? 2 : 1
+   
+    let fdForMoveItemToArchieve = {
+      assigned: this.editUserInfo.allData.assigned,
+      bannerImage: this.editUserInfo.allData.bannerImage,
+      businessDetails: this.editUserInfo.allData.businessDetails,
+      businessTeam: this.editUserInfo.allData.businessTeam,
+      businessTypeId: this.editUserInfo.allData.businessTypeId,
+      callScheduled: this.editUserInfo.allData.businessTypeId,
+      contactNumber: this.editUserInfo.allData.contactNumber,
+      contactOwnerName: this.editUserInfo.allData.contactOwnerName,
+      createdAt: this.editUserInfo.allData.createdAt,
+      credits: this.editUserInfo.allData.credits,
+      description: this.editUserInfo.allData.description,
+      details: this.editUserInfo.allData.details,
+      editors: this.editUserInfo.allData.editors,
+      executives: this.editUserInfo.allData.executives,
+      facebook: this.editUserInfo.allData.facebook,
+      id: this.editUserInfo.allData.id,
+      instagram: this.editUserInfo.allData.instagram,
+      linkedin: this.editUserInfo.allData.linkedin,
+      massivePortalId: this.editUserInfo.allData.massivePortalId,
+      name: this.editUserInfo.allData.name,
+      phoneNumber: this.editUserInfo.allData.phoneNumber,
+      pinterest: this.editUserInfo.allData.pinterest,
+      pointOfContactId: this.editUserInfo.allData.pointOfContactId,
+      priceRangeId: this.editUserInfo.allData.priceRangeId,
+      producers: this.editUserInfo.allData.producers,
+      project: this.editUserInfo.allData.project,
+      projectTeam: this.editUserInfo.allData.projectTeam,
+      projects: this.editUserInfo.allData.projects,
+      role: this.roleOfUser,
+      smallImage: this.editUserInfo.allData.smallImage,
+      status: ststusInfo,
+      subscriptionBlends: this.editUserInfo.allData.subscriptionBlends,
+      thumbnail: this.editUserInfo.allData.thumbnail,
+      timeRangeId: this.editUserInfo.allData.timeRangeId,
+      type: this.editUserInfo.allData.type,
+      updatedAt: this.editUserInfo.allData.updatedAt,
+      userBusiness: this.editUserInfo.allData.userBusiness,
+      website: this.editUserInfo.allData.website,
+      youtube: this.editUserInfo.allData.youtube
     }
 
+   
+    this.dashboardService
+      .moveDataToArchieveState(fdForMoveItemToArchieve)
+      .subscribe(res => {
+        this.responseFromApiListStatus1 =
+          this.responseFromApiListStatus1.filter(
+            data => data.id !== fdForMoveItemToArchieve.id
+          )
+        this.responseFromApiListStatus2 =
+          this.responseFromApiListStatus2.filter(
+            data => data.id !== fdForMoveItemToArchieve.id
+          )
+        this.fetchDataFromApi()
 
+        this.toasterService.success(`${res['message']}`, '')
 
+        //this.responseFromApiListStatus2
 
-
-
+        //  this.getDataFromListStatus1Api()
+      })
+  }
 }

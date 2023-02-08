@@ -19,6 +19,7 @@ export class DashboardserviceService {
   apiUrlBusinessList:string;
   apiUrlPostDataCreatingNewUser:string;
   updateBusinessTeamDataApiUrl:string;
+  archieveDataApiUrl:string;
 
   getResponseFromProjectsBusinessListStatus1() {
     this.apiUrlListStatus1 = `https://stage.blendedsense.com/api/projects/businesses/list?status=1`;
@@ -74,6 +75,19 @@ export class DashboardserviceService {
             this.updateBusinessTeamDataApiUrl= 'https://stage.blendedsense.com/api/projects/businesses/update'
             return this.http.put(this.updateBusinessTeamDataApiUrl,updateInfo);
   }
+
+  moveDataToArchieveState(archieveInfo){
+          this.archieveDataApiUrl = 'https://stage.blendedsense.com/api/projects/businesses/status'
+          return this.http.put(this.archieveDataApiUrl,archieveInfo);
+  }
+
+  addBusinessToMyBusinessApi(bsId){
+
+    let apiUrl = `https://stage.blendedsense.com/api/projects/${bsId}/assign_to_my_projects`;
+      return this.http.post(apiUrl,bsId)
+
+  }
+
 
 
 
