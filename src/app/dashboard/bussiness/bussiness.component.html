@@ -88,7 +88,7 @@
         <ng-template pTemplate>
             <ul class="dropDownUlEdit">
                 <li (click)="editAndDeleteForm.hide();enableformForEdit(totalRecordsDataToDisplay)"><div class="editFormDiv"><app-icon [iconStyle]="'pi pi-file-edit editAndDeleteIcon'"></app-icon> <h1>Edit</h1> </div></li>
-                <li (click)="editAndDeleteForm.hide()"><div class="editFormDiv"><img [src]="archieveIconPath" alt="Noicon" class="archieveIcon" /> <h1>Archieve</h1> </div></li>
+                <li (click)="editAndDeleteForm.hide();archeiveDataFromMyBusiness(totalRecordsDataToDisplay)"><div class="editFormDiv"><img [src]="archieveIconPath" alt="Noicon" class="archieveIcon" /> <h1>Archieve</h1> </div></li>
             </ul>
         </ng-template>
     
@@ -214,7 +214,7 @@
                     
                     <div class="multiselectDropDownDiv">
                         <app-multiselectdropdown  [listofitems]="listOfProducersInUserList"
-                             [FormGroup]="addNewBusinessOrOrganization" [selecteditems]="roleOfUser === 'producer' ? defaultSelectedItemList : ''"
+                             [FormGroup]="addNewBusinessOrOrganization" [selecteditems]="roleOfUser === 'producer' ? defaultSelectedItemList : ''" [idInfo]="'removingItemDisable'"
                             [FromControlerName]="'contentProducers'" [dropDownDiv]="'p-float-label'" [optionalLabelInfo]="'fullName'"  [placeHolder]="'Content Producer'"  ></app-multiselectdropdown>
                     </div>
                     <div class="multiselectDropDownDiv">
