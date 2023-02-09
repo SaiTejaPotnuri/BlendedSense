@@ -299,11 +299,11 @@ li:nth-child(2):hover {
   }
 
   .overlayNewButtonPanelOverWrite{
-      width: 15vw !important;
-      max-width: 15vw !important;
+      width: fit-content !important;
+      max-width: fit-content !important;
        position: absolute !important;
     margin-left: -0.8% !important;
-    margin-top: -4% !important;
+    margin-top: -8vh !important;
     box-shadow: 2px 3px 7px grey;
 
   }

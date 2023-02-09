@@ -401,6 +401,7 @@ export class BussinessComponent {
 
   fetchSearchingText (data) {
     this.fetchedSearchBoxData = data
+    
     this.fetchDataFromApi()
   }
   cancelDialog () {
@@ -586,8 +587,10 @@ addBusinessToMyBusiness(){
     let businessIdData = this.editUserInfo.allData.id;
 
     this.dashboardService.addBusinessToMyBusinessApi(businessIdData).subscribe(res=>{
-          console.log(res);
-          
+            this.toasterService.success(`${res['message']}`, '');
+
+            this.editUserInfo.allData.assigned = true;
+
     })
 
 }
@@ -668,6 +671,9 @@ addBusinessToMyBusiness(){
     let statusValue1 = this.listOfDataToFetch.filter(
       sta => sta.id === this.editUserInfo.allData.status
     )
+
+
+    
 
     this.editedData = {
       businessLogo1: this.businessLogoPath,

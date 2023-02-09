@@ -84,7 +84,7 @@ export class DashboardserviceService {
   addBusinessToMyBusinessApi(bsId){
 
     let apiUrl = `https://stage.blendedsense.com/api/projects/${bsId}/assign_to_my_projects`;
-      return this.http.post(apiUrl,bsId)
+     return this.http.post(apiUrl,'')
 
   }
 

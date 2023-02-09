@@ -1,5 +1,12 @@
-<div [formGroup]="FormGroup" [class]="styleClass" class="container">
-     <i [class]="fieldIcon" (click)="showPassword()" style="cursor: pointer;"></i>
+<div [formGroup]="FormGroup" [class]="styleClass"   class="container">
      
-     <input [type]="typeOfInput" [placeholder]="placeholder"   (keyup)="showSearchingTextChanged($event)" [id]="passwordId" class="inputtagStyle"  pInputText [formControlName]="name" [readonly]="readOnlyStatus"/> 
+          <i [class]="fieldIcon"   (click)="showPassword()" style="cursor: pointer;"></i>
+     
+    
+       
+          <input [type]="typeOfInput" [placeholder]="placeholder" (keyup)="showSearchingTextChanged($event)"
+               [id]="passwordId" class="inputtagStyle" pInputText [formControlName]="name"
+               [readonly]="readOnlyStatus" />
+           <i *ngIf="enableIConCross === true" class="pi pi-times secondIconStyle" (click)="removeDataInInputText()"   ></i>
+          
 </div>

@@ -4,6 +4,41 @@
     border-radius: 4px;
     font-family: Poppins;
 }
-.container{
+
+.container {
     width: 100%;
 }
+
+
+.secondIconStyle{
+        cursor: pointer;
+        z-index: 50;
+        right: 10px;
+        background-color: #ffff;
+        padding-left: 5px;
+        color: #495057;
+}
+
+::ng-deep{
+        .p-input-icon-left > .p-inputtext {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem !important;
+}
+}
+
+// ::ng-deep {
+
+
+//     .clearIcon {
+//        .p-input-icon-right {
+
+//             display: inline-block;
+//             padding-right: 10px !important; 
+//             z-index: 50 !important;
+//             right: 7px !important;
+//             background-color: #ffff !important;
+//             padding-left: 3px !important;
+
+//         }
+//     }
+// }

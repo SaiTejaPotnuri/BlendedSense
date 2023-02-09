@@ -37,9 +37,9 @@
                 (selectedItemInfo)="fetchParticularTypeInfo($event)"></app-dropdowncomponent>
         </div>
         <div class="searchContainer">
-            <app-inputtag [typeOfInput]="'text'" [styleClass]="'p-input-icon-left'" [fieldIcon]="'pi pi-search'"
+            <app-inputtag [typeOfInput]="'text'" [styleClass]="'p-input-icon-left'"  [fieldIcon]="'pi pi-search'"
                 [FormGroup]="searchForm" (showSearchingText)="fetchSearchingText($event)" [placeholder]="'Search'"
-                [name]="'searchText'"></app-inputtag>
+                [name]="'searchText'" [enableCrossSymbol]="true" ></app-inputtag>
         </div>
 
     </div>
@@ -215,17 +215,17 @@
                     
                     <div class="multiselectDropDownDiv">
                         <app-multiselectdropdown  [listofitems]="listOfProducersInUserList"
-                             [FormGroup]="addNewBusinessOrOrganization" [selecteditems]="roleOfUser === 'producer' ? defaultSelectedItemList : ''" [idInfo]="'removingItemDisable'"
-                            [FromControlerName]="'contentProducers'" [dropDownDiv]="'p-float-label'" [optionalLabelInfo]="'fullName'"  [placeHolder]="'Content Producer'"  ></app-multiselectdropdown>
+                             [FormGroupName]="addNewBusinessOrOrganization" [selecteditems]="roleOfUser === 'producer' ? defaultSelectedItemList : ''" [idInfo]="'removingItemDisable'"
+                            [FromControlerName]="'contentProducers'" [dropDownDiv]="'p-float-label'" [optionalLabelInfo]="'fullName'" [pointOfContactData]="addNewBusinessOrOrganization.get('businessList')?.value"  [placeHolder]="'Content Producer'"  ></app-multiselectdropdown>
                     </div>
                     <div class="multiselectDropDownDiv">
                         <app-multiselectdropdown  [listofitems]="listOfExectivesInUserList"
-                             [FormGroup]="addNewBusinessOrOrganization" [selecteditems]="roleOfUser === 'executive' ? defaultSelectedItemList : ''"
+                             [FormGroupName]="addNewBusinessOrOrganization" [selecteditems]="roleOfUser === 'executive' ? defaultSelectedItemList : ''"
                             [FromControlerName]="'productionMangers'" [dropDownDiv]="'p-float-label'" [optionalLabelInfo]="'fullName'"  [placeHolder]="'Production Manager'"  ></app-multiselectdropdown>
                     </div>
                     <div class="multiselectDropDownDiv">
                         <app-multiselectdropdown  [listofitems]="listOfEditorsInUserList"
-                             [FormGroup]="addNewBusinessOrOrganization" [selecteditems]="roleOfUser === 'editor' ? defaultSelectedItemList : ''"
+                             [FormGroupName]="addNewBusinessOrOrganization" [selecteditems]="roleOfUser === 'editor' ? defaultSelectedItemList : ''"
                             [FromControlerName]="'editorsList'" [dropDownDiv]="'p-float-label'" [optionalLabelInfo]="'fullName'"  [placeHolder]="'Editor'"  ></app-multiselectdropdown>
                     </div>
                 <div class="multiselectDropDownDiv">
